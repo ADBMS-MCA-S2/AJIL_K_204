@@ -11,7 +11,7 @@ SELECT * FROM PERSON;
 
 CREATE TABLE COVSTATUS(pid INT NOT NULL,pname VARCHAR(20) NOT NULL,vaccine VARCHAR(20),vstatus VARCHAR(20) NOT NULL);
 
--- vaccstatus: PROCEDURE
+-- vaccstatus : PROCEDURE
 
 CALL vaccstatus(1,"Akhila","COVISHEILD",2);
 CALL vaccstatus(2,"Amal","COVISHEILD",2);
@@ -21,4 +21,5 @@ CALL vaccstatus(5,"Clint",NULL,0);
     
 SELECT * FROM COVSTATUS;
     
+-- travel : FUNCTION
 SELECT pid,pname,travel(novaccine) FROM PERSON;
