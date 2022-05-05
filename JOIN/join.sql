@@ -46,7 +46,7 @@ SELECT Mov_title FROM MOVIES WHERE Mov_id IN (SELECT Mov_id FROM MOVIE_CAST WHER
 
 SELECT Distinct Act_Name FROM ACTOR INNER JOIN MOVIE_CAST ON ACTOR.Act_id=MOVIE_CAST.Act_id JOIN MOVIES ON MOVIE_CAST.Mov_id=MOVIES.Mov_id WHERE MOVIES.Mov_Year<2000 OR MOVIES.Mov_Year>2015 AND MOVIES.Mov_id=MOVIE_CAST.Mov_id and ACTOR.Act_id=MOVIE_CAST.Act_id; 
     
-SELECT mov_title,MAX(rev_stars) FROM movies INNER JOIN rating USING (mov_id) GROUP BY mov_title HAVING MAX(rev_stars)>0 ORDER BY mov_title;
+SELECT Mov_title,MAX(Rev_stars) FROM MOVIES INNER JOIN RATING USING (Mov_id) GROUP BY Mov_title HAVING MAX(Rev_stars)>0 ORDER BY Mov_title;
 
 SET SQL_SAFE_UPDATES=0;
-UPDATE rating SET rev_stars=5 WHERE mov_id IN (SELECT mov_id FROM movies WHERE dir_id IN (SELECT dir_id FROM director WHERE dir_name='steven spielberg'));
+UPDATE RATING SET Rev_stars=5 WHERE Mov_id IN (SELECT Mov_id FROM MOVIES WHERE Dir_id IN (SELECT Dir_id FROM DIRECTOR WHERE Dir_name='Steven Spielberg'));
