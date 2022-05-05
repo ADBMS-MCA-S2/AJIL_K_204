@@ -1,4 +1,4 @@
-
+-- PROCEDURE FOR COVID.sql
 CREATE DEFINER=`root`@`localhost` PROCEDURE `vaccstatus`(pid INT,pname VARCHAR(20),vaccine VARCHAR(20),novaccine INT)
 BEGIN
 IF (novaccine=2)
