@@ -1,3 +1,8 @@
+
+
+> db.Student.find({"DEGREE":"BCA"}).count()
+4
+
 > db.Student.find({},{SNAME:1,DEGREE:1,_id:0})
 { "SNAME" : "VIRAT", "DEGREE" : "BCA" }
 { "SNAME" : "ROHIT", "DEGREE" : "BSc.CS" }
