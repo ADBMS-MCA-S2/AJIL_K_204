@@ -1,0 +1,24 @@
+> db.Student.find({},{SNAME:1,DEGREE:1,_id:0})
+{ "SNAME" : "VIRAT", "DEGREE" : "BCA" }
+{ "SNAME" : "ROHIT", "DEGREE" : "BSc.CS" }
+{ "SNAME" : "ABHIJITH", "DEGREE" : "BSc.E" }
+{ "SNAME" : "AKSHAY DAS", "DEGREE" : "BCom" }
+{ "SNAME" : "ARYA S", "DEGREE" : "BCA" }
+{ "SNAME" : "DEVI", "DEGREE" : "BCA" }
+{ "SNAME" : "POOJA", "DEGREE" : "BTECH" }
+{ "SNAME" : "SIVA", "DEGREE" : "BTECH" }
+{ "SNAME" : "SANU", "DEGREE" : "BCA" }
+
+> db.Student.distinct("DEGREE")
+[ "BCA", "BCom", "BSc.CS", "BSc.E", "BTECH" ]
+
+> db.Student.find({"CGPA":{$gt:6,$lt:7.5},"DEGREE":"BCA"})
+{ "_id" : ObjectId("6278d6a509f4accdf1f32184"), "SRN" : 9, "SNAME" : "SANU", "DEGREE" : "BCA", "SEM" : 3, "CGPA" : 7.2 }
+
+> db.Student.find({$or:[{"SEM":6},{"DEGREE":"BCA"}]})
+{ "_id" : ObjectId("6278a9f3dd6acf26472520a6"), "SRN" : 1, "SNAME" : "VIRAT", "DEGREE" : "BCA", "SEM" : 6, "CGPA" : 8.5 }
+{ "_id" : ObjectId("6278aa60dd6acf26472520a8"), "SRN" : 4, "SNAME" : "ABHIJITH", "DEGREE" : "BSc.E", "SEM" : 6, "CGPA" : 8 }
+{ "_id" : ObjectId("6278ab16dd6acf26472520aa"), "SRN" : 5, "SNAME" : "ARYA S", "DEGREE" : "BCA", "SEM" : 3, "CGPA" : 8.1 }
+{ "_id" : ObjectId("6278ab42dd6acf26472520ab"), "SRN" : 6, "SNAME" : "DEVI", "DEGREE" : "BCA", "SEM" : 4, "CGPA" : 7.9 }
+{ "_id" : ObjectId("6278aba0dd6acf26472520ac"), "SRN" : 3, "SNAME" : "POOJA", "DEGREE" : "BTECH", "SEM" : 6, "CGPA" : 8.2 }
+{ "_id" : ObjectId("6278d6a509f4accdf1f32184"), "SRN" : 9, "SNAME" : "SANU", "DEGREE" : "BCA", "SEM" : 3, "CGPA" : 7.2 }
