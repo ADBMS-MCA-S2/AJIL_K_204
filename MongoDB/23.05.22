@@ -1,0 +1,575 @@
+> use company
+switched to db company
+> show collections
+employee
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("628218fae0c018573e7ed59a"),
+        "eid" : 121,
+        "ename" : "Rahul",
+        "dept" : "backend",
+        "desig" : "developer",
+        "salary" : 85000,
+        "yoj" : 2020,
+        "address" : {
+                "dno" : 567,
+                "street" : "Fort Kochi",
+                "locality" : "KOCHI",
+                "city" : "ernakulam"
+        }
+}
+{
+        "_id" : ObjectId("62821ab4e0c018573e7ed59b"),
+        "eid" : 121,
+        "ename" : "Rohit",
+        "dept" : "backend",
+        "desig" : "trainee",
+        "salary" : 34000,
+        "yoj" : 2023,
+        "address" : {
+                "dno" : 527,
+                "street" : "abc",
+                "locality" : "Attingal",
+                "city" : "TVPM"
+        }
+}
+{
+        "_id" : ObjectId("62821b28e0c018573e7ed59c"),
+        "eid" : 123,
+        "ename" : "Virat",
+        "dept" : "frontend",
+        "desig" : "developer",
+        "salary" : 55000,
+        "yoj" : 2021,
+        "address" : {
+                "dno" : 567,
+                "street" : "Killikollur",
+                "locality" : "Karikkode",
+                "city" : "KOLLAM"
+        }
+}
+> db.employee.aggregate([{"age":23}])
+uncaught exception: Error: command failed: {
+        "ok" : 0,
+        "errmsg" : "Unrecognized pipeline stage name: 'age'",
+        "code" : 40324,
+        "codeName" : "Location40324"
+} with original command request: {
+        "aggregate" : "employee",
+        "pipeline" : [
+                {
+                        "age" : 23
+                }
+        ],
+        "cursor" : {
+
+        },
+        "lsid" : {
+                "id" : UUID("4b9b3e67-4e1b-4799-906b-090d2e200e9b")
+        }
+} on connection: connection to 127.0.0.1:27017 : aggregate failed :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:18:14
+_assertCommandWorked@src/mongo/shell/assert.js:737:17
+assert.commandWorked@src/mongo/shell/assert.js:829:16
+DB.prototype._runAggregate@src/mongo/shell/db.js:281:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1058:12
+@(shell):1:1
+> db.employee.aggregate([{"age": 23}])
+uncaught exception: Error: command failed: {
+        "ok" : 0,
+        "errmsg" : "Unrecognized pipeline stage name: 'age'",
+        "code" : 40324,
+        "codeName" : "Location40324"
+} with original command request: {
+        "aggregate" : "employee",
+        "pipeline" : [
+                {
+                        "age" : 23
+                }
+        ],
+        "cursor" : {
+
+        },
+        "lsid" : {
+                "id" : UUID("4b9b3e67-4e1b-4799-906b-090d2e200e9b")
+        }
+} on connection: connection to 127.0.0.1:27017 : aggregate failed :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:18:14
+_assertCommandWorked@src/mongo/shell/assert.js:737:17
+assert.commandWorked@src/mongo/shell/assert.js:829:16
+DB.prototype._runAggregate@src/mongo/shell/db.js:281:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1058:12
+@(shell):1:1
+> db.employee.update([{$addFields:{"age": 23}}])
+uncaught exception: Error: need an update object or pipeline :
+DBCollection.prototype._parseUpdate@src/mongo/shell/collection.js:461:15
+DBCollection.prototype.update@src/mongo/shell/collection.js:510:18
+@(shell):1:1
+> db.employee.updateCollection([{$addFields:{"age": 23}}])
+uncaught exception: TypeError: db.employee.updateCollection is not a function :
+@(shell):1:1
+> db.employee.updateMany([{$addFields:{"age": 23}}])
+uncaught exception: TypeError: can't convert undefined to object :
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:648:20
+@(shell):1:1
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("628218fae0c018573e7ed59a"),
+        "eid" : 121,
+        "ename" : "Rahul",
+        "dept" : "backend",
+        "desig" : "developer",
+        "salary" : 85000,
+        "yoj" : 2020,
+        "address" : {
+                "dno" : 567,
+                "street" : "Fort Kochi",
+                "locality" : "KOCHI",
+                "city" : "ernakulam"
+        }
+}
+{
+        "_id" : ObjectId("62821ab4e0c018573e7ed59b"),
+        "eid" : 121,
+        "ename" : "Rohit",
+        "dept" : "backend",
+        "desig" : "trainee",
+        "salary" : 34000,
+        "yoj" : 2023,
+        "address" : {
+                "dno" : 527,
+                "street" : "abc",
+                "locality" : "Attingal",
+                "city" : "TVPM"
+        }
+}
+{
+        "_id" : ObjectId("62821b28e0c018573e7ed59c"),
+        "eid" : 123,
+        "ename" : "Virat",
+        "dept" : "frontend",
+        "desig" : "developer",
+        "salary" : 55000,
+        "yoj" : 2021,
+        "address" : {
+                "dno" : 567,
+                "street" : "Killikollur",
+                "locality" : "Karikkode",
+                "city" : "KOLLAM"
+        }
+}
+> db.employee.aggregate([{$addField:{["age" : 23]}}])
+uncaught exception: SyntaxError: missing ] in computed property name :
+@(shell):1:42
+> db.employee.aggregate([{$addFields:{["age" : 23]}}])
+uncaught exception: SyntaxError: missing ] in computed property name :
+@(shell):1:43
+> db.employee.aggregate({$addFields:{["age" : 23]}})
+uncaught exception: SyntaxError: missing ] in computed property name :
+@(shell):1:42
+> db.employee.aggregate({$addFields:{"age" : 23}})
+{ "_id" : ObjectId("628218fae0c018573e7ed59a"), "eid" : 121, "ename" : "Rahul", "dept" : "backend", "desig" : "developer", "salary" : 85000, "yoj" : 2020, "address" : { "dno" : 567, "street" : "Fort Kochi", "locality" : "KOCHI", "city" : "ernakulam" }, "age" : 23 }
+{ "_id" : ObjectId("62821ab4e0c018573e7ed59b"), "eid" : 121, "ename" : "Rohit", "dept" : "backend", "desig" : "trainee", "salary" : 34000, "yoj" : 2023, "address" : { "dno" : 527, "street" : "abc", "locality" : "Attingal", "city" : "TVPM" }, "age" : 23 }
+{ "_id" : ObjectId("62821b28e0c018573e7ed59c"), "eid" : 123, "ename" : "Virat", "dept" : "frontend", "desig" : "developer", "salary" : 55000, "yoj" : 2021, "address" : { "dno" : 567, "street" : "Killikollur", "locality" : "Karikkode", "city" : "KOLLAM" }, "age" : 23 }
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("628218fae0c018573e7ed59a"),
+        "eid" : 121,
+        "ename" : "Rahul",
+        "dept" : "backend",
+        "desig" : "developer",
+        "salary" : 85000,
+        "yoj" : 2020,
+        "address" : {
+                "dno" : 567,
+                "street" : "Fort Kochi",
+                "locality" : "KOCHI",
+                "city" : "ernakulam"
+        }
+}
+{
+        "_id" : ObjectId("62821ab4e0c018573e7ed59b"),
+        "eid" : 121,
+        "ename" : "Rohit",
+        "dept" : "backend",
+        "desig" : "trainee",
+        "salary" : 34000,
+        "yoj" : 2023,
+        "address" : {
+                "dno" : 527,
+                "street" : "abc",
+                "locality" : "Attingal",
+                "city" : "TVPM"
+        }
+}
+{
+        "_id" : ObjectId("62821b28e0c018573e7ed59c"),
+        "eid" : 123,
+        "ename" : "Virat",
+        "dept" : "frontend",
+        "desig" : "developer",
+        "salary" : 55000,
+        "yoj" : 2021,
+        "address" : {
+                "dno" : 567,
+                "street" : "Killikollur",
+                "locality" : "Karikkode",
+                "city" : "KOLLAM"
+        }
+}
+> db.employee.aggregate({$addFields:{"age" : [23]}})
+{ "_id" : ObjectId("628218fae0c018573e7ed59a"), "eid" : 121, "ename" : "Rahul", "dept" : "backend", "desig" : "developer", "salary" : 85000, "yoj" : 2020, "address" : { "dno" : 567, "street" : "Fort Kochi", "locality" : "KOCHI", "city" : "ernakulam" }, "age" : [ 23 ] }
+{ "_id" : ObjectId("62821ab4e0c018573e7ed59b"), "eid" : 121, "ename" : "Rohit", "dept" : "backend", "desig" : "trainee", "salary" : 34000, "yoj" : 2023, "address" : { "dno" : 527, "street" : "abc", "locality" : "Attingal", "city" : "TVPM" }, "age" : [ 23 ] }
+{ "_id" : ObjectId("62821b28e0c018573e7ed59c"), "eid" : 123, "ename" : "Virat", "dept" : "frontend", "desig" : "developer", "salary" : 55000, "yoj" : 2021, "address" : { "dno" : 567, "street" : "Killikollur", "locality" : "Karikkode", "city" : "KOLLAM" }, "age" : [ 23 ] }
+> db.employee.aggregate({$addFields:{"age" : 23}}).pretty()
+{
+        "_id" : ObjectId("628218fae0c018573e7ed59a"),
+        "eid" : 121,
+        "ename" : "Rahul",
+        "dept" : "backend",
+        "desig" : "developer",
+        "salary" : 85000,
+        "yoj" : 2020,
+        "address" : {
+                "dno" : 567,
+                "street" : "Fort Kochi",
+                "locality" : "KOCHI",
+                "city" : "ernakulam"
+        },
+        "age" : 23
+}
+{
+        "_id" : ObjectId("62821ab4e0c018573e7ed59b"),
+        "eid" : 121,
+        "ename" : "Rohit",
+        "dept" : "backend",
+        "desig" : "trainee",
+        "salary" : 34000,
+        "yoj" : 2023,
+        "address" : {
+                "dno" : 527,
+                "street" : "abc",
+                "locality" : "Attingal",
+                "city" : "TVPM"
+        },
+        "age" : 23
+}
+{
+        "_id" : ObjectId("62821b28e0c018573e7ed59c"),
+        "eid" : 123,
+        "ename" : "Virat",
+        "dept" : "frontend",
+        "desig" : "developer",
+        "salary" : 55000,
+        "yoj" : 2021,
+        "address" : {
+                "dno" : 567,
+                "street" : "Killikollur",
+                "locality" : "Karikkode",
+                "city" : "KOLLAM"
+        },
+        "age" : 23
+}
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("628218fae0c018573e7ed59a"),
+        "eid" : 121,
+        "ename" : "Rahul",
+        "dept" : "backend",
+        "desig" : "developer",
+        "salary" : 85000,
+        "yoj" : 2020,
+        "address" : {
+                "dno" : 567,
+                "street" : "Fort Kochi",
+                "locality" : "KOCHI",
+                "city" : "ernakulam"
+        }
+}
+{
+        "_id" : ObjectId("62821ab4e0c018573e7ed59b"),
+        "eid" : 121,
+        "ename" : "Rohit",
+        "dept" : "backend",
+        "desig" : "trainee",
+        "salary" : 34000,
+        "yoj" : 2023,
+        "address" : {
+                "dno" : 527,
+                "street" : "abc",
+                "locality" : "Attingal",
+                "city" : "TVPM"
+        }
+}
+{
+        "_id" : ObjectId("62821b28e0c018573e7ed59c"),
+        "eid" : 123,
+        "ename" : "Virat",
+        "dept" : "frontend",
+        "desig" : "developer",
+        "salary" : 55000,
+        "yoj" : 2021,
+        "address" : {
+                "dno" : 567,
+                "street" : "Killikollur",
+                "locality" : "Karikkode",
+                "city" : "KOLLAM"
+        }
+}
+> db.employee.updateMany({$set:{$addFields:{"age" : 23}}})
+uncaught exception: TypeError: can't convert undefined to object :
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:648:20
+@(shell):1:1
+> db.employee.updateMany({$addFields:{"age" : 23}})
+uncaught exception: TypeError: can't convert undefined to object :
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:648:20
+@(shell):1:1
+> db.employee.updateMany({$set:{"age" : 23}})
+uncaught exception: TypeError: can't convert undefined to object :
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:648:20
+@(shell):1:1
+> db.employee.updateOne({$set{"age" : 23}})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:27
+> db.employee.updateOne({ename:"Virat"},{$set{"age" : 23}})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:43
+> db.employee.updateOne({"ename":"Virat"},{$set{"age" : 23}})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:45
+> db.employee.find({},{ename:1})
+{ "_id" : ObjectId("628218fae0c018573e7ed59a"), "ename" : "Rahul" }
+{ "_id" : ObjectId("62821ab4e0c018573e7ed59b"), "ename" : "Rohit" }
+{ "_id" : ObjectId("62821b28e0c018573e7ed59c"), "ename" : "Virat" }
+> db.employee.find({},{ename:1},_id:0)
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:33
+> db.employee.find({},{ename:1},"_id":0)
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:35
+> db.employee.find({"_id":0},{ename:1})
+> db.employee.find({_id:0},{ename:1})
+> db.employee.find({},{ename:1, _id:0})
+{ "ename" : "Rahul" }
+{ "ename" : "Rohit" }
+{ "ename" : "Virat" }
+> db.employee.find({ename:{$regex:"r$"}},{ename:1, _id:0})
+> db.employee.find({ename:{$regex:"$r"}},{ename:1, _id:0})
+> db.employee.find({ename:{$regex:"$R"}},{ename:1, _id:0})
+> db.employee.find({ename:{$regex:"R$"}},{ename:1, _id:0})
+> db.employee.find({ename:{$regex:"^R"}},{ename:1, _id:0})
+{ "ename" : "Rahul" }
+{ "ename" : "Rohit" }
+> db.employee.find({ename:{$regex:"t$"}},{ename:1, _id:0})
+{ "ename" : "Rohit" }
+{ "ename" : "Virat" }
+> db.employee.find({ename:{$regex:"$R"}},{ename:1, _id:0})
+> use candidate
+switched to db candidate
+> db.createCollection("details");
+{ "ok" : 1 }
+> db.details.insert({name:"Devi",age:20,gender:"female",amount:100000});
+WriteResult({ "nInserted" : 1 })
+> db.details.insert({name:"Pooja",age:19,gender:"female",amount:120000});
+WriteResult({ "nInserted" : 1 })
+> db.details.insert({name:"Adarsh",age:24,gender:"Male",amount:80000});
+WriteResult({ "nInserted" : 1 })
+> db.details.insert({name:"Surya",age:12,gender:"Male",amount:15000});
+WriteResult({ "nInserted" : 1 })
+> db.details.insert({name:"Chinnu",age:38,gender:"Female",amount:35000});
+WriteResult({ "nInserted" : 1 })
+> db.details.insert({name:"Lal",age:42,gender:"Male",amount:25000});
+WriteResult({ "nInserted" : 1 })
+> db.details.insert({name:"Anjana",age:22,gender:"Female",amount:20000});
+WriteResult({ "nInserted" : 1 })
+> db.details.find().pretty
+function() {
+    this._prettyShell = true;
+    return this;
+}
+> db.details.find({}).pretty
+function() {
+    this._prettyShell = true;
+    return this;
+}
+> db.details.find({}).pretty()
+{
+        "_id" : ObjectId("628b5e84bcaafa4c7dc54e19"),
+        "name" : "Devi",
+        "age" : 20,
+        "gender" : "female",
+        "amount" : 100000
+}
+{
+        "_id" : ObjectId("628b5ea8bcaafa4c7dc54e1a"),
+        "name" : "Pooja",
+        "age" : 19,
+        "gender" : "female",
+        "amount" : 120000
+}
+{
+        "_id" : ObjectId("628b5ed1bcaafa4c7dc54e1b"),
+        "name" : "Adarsh",
+        "age" : 24,
+        "gender" : "Male",
+        "amount" : 80000
+}
+{
+        "_id" : ObjectId("628b5ef5bcaafa4c7dc54e1c"),
+        "name" : "Surya",
+        "age" : 12,
+        "gender" : "Male",
+        "amount" : 15000
+}
+{
+        "_id" : ObjectId("628b5f2dbcaafa4c7dc54e1d"),
+        "name" : "Chinnu",
+        "age" : 38,
+        "gender" : "Female",
+        "amount" : 35000
+}
+{
+        "_id" : ObjectId("628b5f5abcaafa4c7dc54e1e"),
+        "name" : "Lal",
+        "age" : 42,
+        "gender" : "Male",
+        "amount" : 25000
+}
+{
+        "_id" : ObjectId("628b5f8abcaafa4c7dc54e1f"),
+        "name" : "Anjana",
+        "age" : 22,
+        "gender" : "Female",
+        "amount" : 20000
+}
+> db.details.find({gender:"Male",age}).pretty()
+uncaught exception: ReferenceError: age is not defined :
+@(shell):1:32
+> db.details.find({gender:"Male",age:{$lt:25}}).pretty()
+{
+        "_id" : ObjectId("628b5ed1bcaafa4c7dc54e1b"),
+        "name" : "Adarsh",
+        "age" : 24,
+        "gender" : "Male",
+        "amount" : 80000
+}
+{
+        "_id" : ObjectId("628b5ef5bcaafa4c7dc54e1c"),
+        "name" : "Surya",
+        "age" : 12,
+        "gender" : "Male",
+        "amount" : 15000
+}
+> db.details.aggregate($group:{_id,"$gender","total amount":{$sum: amount}})
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:27
+> db.details.aggregate($group:{_id,"$gender","total amount":{$sum: $amount}})
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:27
+> db.details.aggregate($group:{_id:"$gender","total amount":{$sum: $amount}})
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:27
+> db.details.aggregate([$group:{_id:"$gender","total amount":{$sum: $amount}}])
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:28
+> db.details.aggregate([{$group:{_id:"$gender","total amount":{$sum: $amount}}}])
+uncaught exception: ReferenceError: $amount is not defined :
+@(shell):1:62
+> db.details.aggregate([{$group:{_id:"$gender","total amount":{$sum: amount}}}])
+uncaught exception: ReferenceError: amount is not defined :
+@(shell):1:62
+> db.details.aggregate([{$group:{_id:"$gender","total amount":{$sum:"$amount"}}}])
+{ "_id" : "female", "total amount" : 220000 }
+{ "_id" : "Female", "total amount" : 55000 }
+{ "_id" : "Male", "total amount" : 120000 }
+> db.details.aggregate([{$group:{_id:"$gender","total amount":{$avg:"$amount"}},$match:{age:{$gt:25}}}])
+uncaught exception: Error: command failed: {
+        "ok" : 0,
+        "errmsg" : "A pipeline stage specification object must contain exactly one field.",
+        "code" : 40323,
+        "codeName" : "Location40323"
+} with original command request: {
+        "aggregate" : "details",
+        "pipeline" : [
+                {
+                        "$group" : {
+                                "_id" : "$gender",
+                                "total amount" : {
+                                        "$avg" : "$amount"
+                                }
+                        },
+                        "$match" : {
+                                "age" : {
+                                        "$gt" : 25
+                                }
+                        }
+                }
+        ],
+        "cursor" : {
+
+        },
+        "lsid" : {
+                "id" : UUID("4b9b3e67-4e1b-4799-906b-090d2e200e9b")
+        }
+} on connection: connection to 127.0.0.1:27017 : aggregate failed :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:18:14
+_assertCommandWorked@src/mongo/shell/assert.js:737:17
+assert.commandWorked@src/mongo/shell/assert.js:829:16
+DB.prototype._runAggregate@src/mongo/shell/db.js:281:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1058:12
+@(shell):1:1
+> db.details.aggregate([{$match:{age:{$gt:25}},$group:{_id,"$gender","total amount":{$avg: $amount}}}])
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:66
+> db.details.aggregate([{$match:{_id,age:{$gt:25}},$group:{_id,"$gender","total amount":{$avg: $amount}}}])
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:70
+> db.details.aggregate([{$match:{_id:$age:{$gt:25}},$group:{_id:"$gender","total amount":{$avg: $amount}}}])
+uncaught exception: SyntaxError: missing } after property list :
+@(shell):1:39
+> db.details.aggregate([{$match:{age:{$gt:25}},$group:{_id:"$gender","total amount":{$avg: $amount}}}])
+uncaught exception: ReferenceError: $amount is not defined :
+@(shell):1:84
+> db.details.aggregate([{$match:{$age:{$gt:25}},$group:{_id:"$gender","total amount":{$avg: $amount}}}])
+uncaught exception: ReferenceError: $amount is not defined :
+@(shell):1:85
+> db.details.aggregate([{$match:{$age:{$gt:25}},$group:{_id:"$gender","total amount":{$avg: "$amount"}}}])
+uncaught exception: Error: command failed: {
+        "ok" : 0,
+        "errmsg" : "A pipeline stage specification object must contain exactly one field.",
+        "code" : 40323,
+        "codeName" : "Location40323"
+} with original command request: {
+        "aggregate" : "details",
+        "pipeline" : [
+                {
+                        "$match" : {
+                                "$age" : {
+                                        "$gt" : 25
+                                }
+                        },
+                        "$group" : {
+                                "_id" : "$gender",
+                                "total amount" : {
+                                        "$avg" : "$amount"
+                                }
+                        }
+                }
+        ],
+        "cursor" : {
+
+        },
+        "lsid" : {
+                "id" : UUID("4b9b3e67-4e1b-4799-906b-090d2e200e9b")
+        }
+} on connection: connection to 127.0.0.1:27017 : aggregate failed :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:18:14
+_assertCommandWorked@src/mongo/shell/assert.js:737:17
+assert.commandWorked@src/mongo/shell/assert.js:829:16
+DB.prototype._runAggregate@src/mongo/shell/db.js:281:5
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1058:12
+@(shell):1:1
