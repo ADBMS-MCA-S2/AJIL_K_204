@@ -1,0 +1,107 @@
+> use college
+switched to db college
+> db.createCollection("studlist")
+{ "ok" : 1 }
+> db.studlist.insert({"fname":"POOJA","lname":"RAJ","gender":"FEMALE","grade":"A+","mark":98,"department":"MCA","contact":{"no":9876543210,"location":"KOLLAM"}})
+WriteResult({ "nInserted" : 1 })
+> db.studlist.insert({"fname":"MONIKA","lname":"SABASITIAN","gender":"FEMALE","grade":"A","mark":88,"department":"MECHANICAL","contact":{"no":9876363210,"location":"THIRUVANATHAPURAM"}})
+WriteResult({ "nInserted" : 1 })
+> db.studlist.insert({"fname":"VIKRAM","lname":"PRABHU","gender":"MALE","grade":"A+","mark":92,"department":"CIVIL","contact":{"no":9876321210,"location":"ERNAKULAM"}})
+WriteResult({ "nInserted" : 1 })
+> db.studlist.insert({"fname":"VIRAT","lname":"V","gender":"MALE","grade":"A","mark":90,"department":"MECHANICAL","contact":{"no":9876321299,"location":"KOLLAM"}})
+WriteResult({ "nInserted" : 1 })
+> db.studlist.insert({"fname":"JOLLY","lname":"KURIAN","gender":"FEMALE","grade":"B+","mark":79,"department":"MECHANICAL","contact":{"no":9876363245,"location":"THIRUVANATHAPURAM"}})
+WriteResult({ "nInserted" : 1 })
+> db.studlist.insert({"fname":"PRABUL","lname":"LAL","gender":"MALE","grade":"A+","mark":99,"department":"MCA","contact":{"no":9876321219,"location":"ERNAKULAM"}})
+WriteResult({ "nInserted" : 1 })
+> db.studlist.find().pretty()
+{
+        "_id" : ObjectId("628c86d5fa88e573eaa46174"),
+        "fname" : "POOJA",
+        "lname" : "RAJ",
+        "gender" : "FEMALE",
+        "grade" : "A+",
+        "mark" : 98,
+        "department" : "MCA",
+        "contact" : {
+                "no" : 9876543210,
+                "location" : "KOLLAM"
+        }
+}
+{
+        "_id" : ObjectId("628c879ffa88e573eaa46175"),
+        "fname" : "MONIKA",
+        "lname" : "SABASITIAN",
+        "gender" : "FEMALE",
+        "grade" : "A",
+        "mark" : 88,
+        "department" : "MECHANICAL",
+        "contact" : {
+                "no" : 9876363210,
+                "location" : "THIRUVANATHAPURAM"
+        }
+}
+{
+        "_id" : ObjectId("628c8801fa88e573eaa46176"),
+        "fname" : "VIKRAM",
+        "lname" : "PRABHU",
+        "gender" : "MALE",
+        "grade" : "A+",
+        "mark" : 92,
+        "department" : "CIVIL",
+        "contact" : {
+                "no" : 9876321210,
+                "location" : "ERNAKULAM"
+        }
+}
+{
+        "_id" : ObjectId("628c8988fa88e573eaa46177"),
+        "fname" : "VIRAT",
+        "lname" : "V",
+        "gender" : "MALE",
+        "grade" : "A",
+        "mark" : 90,
+        "department" : "MECHANICAL",
+        "contact" : {
+                "no" : 9876321299,
+                "location" : "KOLLAM"
+        }
+}
+{
+        "_id" : ObjectId("628c89f7fa88e573eaa46178"),
+        "fname" : "JOLLY",
+        "lname" : "KURIAN",
+        "gender" : "FEMALE",
+        "grade" : "B+",
+        "mark" : 79,
+        "department" : "MECHANICAL",
+        "contact" : {
+                "no" : 9876363245,
+                "location" : "THIRUVANATHAPURAM"
+        }
+}
+{
+        "_id" : ObjectId("628c8a32fa88e573eaa46179"),
+        "fname" : "PRABUL",
+        "lname" : "LAL",
+        "gender" : "MALE",
+        "grade" : "A+",
+        "mark" : 99,
+        "department" : "MCA",
+        "contact" : {
+                "no" : 9876321219,
+                "location" : "ERNAKULAM"
+        }
+}
+
+
+
+
+> db.studlist.find({gender:"FEMALE",department:"MCA"},{fname:1,lname:1,mark:1,_id:0})
+{ "fname" : "POOJA", "lname" : "RAJ", "mark" : 98 }
+
+
+
+
+> db.studlist.aggregate([{$match:{"department":"MCA"}},{$group:{_id:0,"fname":{$first:"$fname"},"lname":{$first:"$lname"},"department":{$first:"$department"},"Highest Mark":{$max:"$mark"}}}])
+{ "_id" : 0, "fname" : "POOJA", "lname" : "RAJ", "department" : "MCA", "Highest Mark" : 99 }
