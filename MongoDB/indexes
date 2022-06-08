@@ -1,3 +1,7 @@
+> use college
+switched to db college
+> db.createCollection("College")
+{ "ok" : 1 }
 > db.College.insert({name:"Varun",regNo:123,mark:[{maths:97,physics:92,chemistry:95,electronics:93}]})
 WriteResult({ "nInserted" : 1 })
 > db.College.insert({name:"Sravan",regNo:128,mark:[{maths:96,physics:90,chemistry:98,electronics:91}]})
