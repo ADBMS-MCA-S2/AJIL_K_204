@@ -155,3 +155,61 @@ uncaught exception: SyntaxError: missing ) after argument list :
         "createdCollectionAutomatically" : false,
         "ok" : 1
 }
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+> db.createCollection("comment")
+{ "ok" : 1 }
+> db.comment.insert({name:"Akhil",post:"Hello"})
+WriteResult({ "nInserted" : 1 })
+> db.comment.insert({name:"Hari",post:"Hai"})
+WriteResult({ "nInserted" : 1 })
+> db.comment.insert({name:"Aswin",post:"Hii"})
+WriteResult({ "nInserted" : 1 })
+> db.comment.insert({name:"Athul",post:"Where are you"})
+WriteResult({ "nInserted" : 1 })
+> db.comment.delete({name:"Athul"})
+uncaught exception: TypeError: db.comment.delete is not a function :
+@(shell):1:1
+> db.comment.remove({name:"Athul"})
+WriteResult({ "nRemoved" : 1 })
+> db.comment.createIndex({post:"text"})
+{
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "createdCollectionAutomatically" : false,
+        "ok" : 1
+}
+> db.comment.getIndexes()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_"
+        },
+        {
+                "v" : 2,
+                "key" : {
+                        "_fts" : "text",
+                        "_ftsx" : 1
+                },
+                "name" : "post_text",
+                "weights" : {
+                        "post" : 1
+                },
+                "default_language" : "english",
+                "language_override" : "language",
+                "textIndexVersion" : 3
+        }
+]
+> db.comment.find({$text:{$search:"\"Hai\""}})
+{ "_id" : ObjectId("62a073f2160ff3f0336da952"), "name" : "Hari", "post" : "Hai" }
