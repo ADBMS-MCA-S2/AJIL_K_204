@@ -148,3 +148,10 @@ uncaught exception: SyntaxError: missing ) after argument list :
                 "name" : "regNo_1_name_1"
         }
 ]
+> db.College.createIndex({"mark.maths":1})
+{
+        "numIndexesBefore" : 2,
+        "numIndexesAfter" : 3,
+        "createdCollectionAutomatically" : false,
+        "ok" : 1
+}
